@@ -1,0 +1,38 @@
+{% extends 'navbar.html' %}
+{% block nav %}
+{% load static %}
+<div class="d-flex justify-content-end p-4">
+    <form action="{% url 'search' %}" method="post" class="d-flex justify-content-end">
+        {% csrf_token %}
+        <input type="search" placeholder="Search" name="searchkey"  class="form-control">
+        <button class="btn btn-dark">Search</button>
+    </form>
+</div>
+        {% if recipe %}
+            <div class="d-flex justify-content-evenly flex-wrap mt-5">
+                {%  for i in recipe %}
+                <div class="card" style="width: 18rem;">
+                    {% if i.image %}
+                        <img src="{{i.image.url}}" height="300px" class="card-img-top" alt="...">
+                    {% endif %}
+                    <div class="card-body">
+                    <h5 class="card-title">@{{i.user}}</h5>
+                    <h4 class="card-subtitle mb-2 text-dark">{{i.name}}</h4>
+                    <p class="">
+                        {{i.created_at}}
+                    </p>
+                    <a href="{% url 'recipedetail' i.id %}" class="stretched-link"></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+        {% else %}
+            <h3 class="text-center text-dark my-4">No Recipes Yet!!</h3>
+            <div class="container text-center mt-20">
+                <h1 class="display-4">Be the First one to Post Your Recipe</h1>
+                <a href="{% url 'addrecipe' %}" class="btn btn-dark btn-lg">Add Your Recipe</a>
+            </div>
+        {% endif %}
+{% endblock nav %}
+

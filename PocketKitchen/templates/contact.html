@@ -1,0 +1,26 @@
+{% extends 'navbar.html' %}
+{% block nav %}
+{% load static %}
+<div style="background-image: url('https://www.pngitem.com/pimgs/m/241-2414388_feedback-download-png-image-feedback-png-transparent-png.png'); height: 640PX;">
+    <div class="container py-5" >
+        <div class="text-center mb-5">
+            <h1 class="fw-bold">We're here to help you level up</h1>
+            <p class="text-muted">We're just one click away to help you.</p>
+            <p class="text-muted">"Your feedback shapes our journey—let us know how we can make your experience even better!"</p>
+            <p class="text-muted">"Help us improve by sharing your thoughts—we’re listening!"</p>
+            <p class="text-muted">"We value your input—let us know how we can serve you better!"</p>
+            <p class="text-muted">"Think it, share it, shape it—your feedback builds our future!"</p>
+            <p class="text-muted">"Your voice matters—share your feedback and help us grow!"</p>
+            
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="">
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'feedback' %}" class="btn btn-info">Send Your Feedback</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock nav %}

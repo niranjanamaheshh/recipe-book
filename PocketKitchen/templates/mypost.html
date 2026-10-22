@@ -1,0 +1,69 @@
+{% extends 'navbar.html' %}
+{% block nav %}
+{% load static %}
+{% if messages %}
+  {% for i in messages %}
+    {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{i}}</strong>
+      </div>
+    {% endif %}
+    {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{i}}</strong>
+      </div>
+    {% endif %} 
+  {% endfor %}
+{% endif %}
+
+    <body>
+      <h2 class="m-3"><span class="text-dark">{{request.user}} {{request.user.last_name}}</span></h2>
+      <div class="container mt-3 text-center">
+        <h1 class="display-2 gradient-text pulse text-decoration-underline fw-bold text-uppercase position-relative d-inline-block" style="color:black">
+          My Posts
+        </h1>
+      </div>
+        
+        <!-- {% for i in data %}
+          <div class="card" style="width:400px">
+            <div class="card-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+              
+              <h4 class="card-title text-center">{{i.name}}</h4>
+            </div>
+            {% if i.image %}
+              <img src="{{i.image.url}}" class="card-img-top" style="height: 400px;" alt="Recipe Image">
+            {% endif %}
+          </div>
+        {% endfor %} -->
+        
+        <div class="row p-3">
+          {% for i in data %}
+          <div class="col-md-4 p-4">
+              <!-- Dropdown -->
+              <div class="card border border-dark bg-white">
+                <div class="dropdown">
+                  <button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-ellipsis-vertical" style="color: #000000;"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="{% url 'edit' i.id %}">Edit</a></li>
+                    <li><a class="dropdown-item" href="{% url 'delete' i.id %}">Delete</a></li>
+                    <!-- <li><a class="dropdown-item" href="#">Linked devices</a></li>
+                    <li><a class="dropdown-item" href="#">Starred messages</a></li>
+                    <li><a class="dropdown-item" href="#">Payments</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li> -->
+                  </ul>
+                </div>
+                <h5 class="text-center">{{i.name}}</h5>
+                {% if i.image %}
+                  <img src="{{i.image.url}}" class="card-img-top" style="height: 400px;" alt="Recipe Image">
+                {% endif %}    
+                <a href="{% url 'recipedetail' i.id %}" class=" text-dark d-flex justify-content-center fw-bold">See More</a>
+              
+              </div>
+          </div>
+          {% endfor %} 
+      </div>
+    {% endblock nav %}

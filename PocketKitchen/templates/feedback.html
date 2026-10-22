@@ -1,0 +1,28 @@
+{% extends 'navbar.html' %}
+{% block nav %}
+{% load static %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background: linear-gradient(135deg, #ffffff 0%, rgb(255, 255, 255) 100%);">
+    <div class="w-50 p-4 rounded shadow bg-white">
+        <h2 class="text-center mb-4 fw-bold" style="color: #6a11cb;">We Value Your Feedback</h2>
+        <p class="text-center text-muted">Your thoughts help us grow. Let us know how we can improve!</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Your Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Your Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Your Feedback</label>
+                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Write your feedback here..." required></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary px-5 py-2">Submit Feedback</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock nav %}

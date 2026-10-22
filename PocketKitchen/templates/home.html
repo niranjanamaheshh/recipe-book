@@ -1,0 +1,148 @@
+{% extends 'navbar.html' %}
+{% block nav %}
+{% load static %}
+{% if messages %}
+  {% for i in messages %}
+    {% if i.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{i}}</strong>
+      </div>
+    {% endif %}
+    {% if i.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{i}}</strong>
+      </div>
+    {% endif %} 
+  {% endfor %}
+{% endif %}
+
+    
+        <!-- Hero Section -->
+        <div class="container text-center my-5">
+            <h1 class="display-4">Welcome to <span class="fw-bold fs-7 custom-text">Pocket Kitchen!</span></h1>
+            <p class="lead">Discover and share the best recipes from around the world.</p>
+            <a href="{% url 'addrecipe' %}" class="btn btn-dark btn-lg">Add Your Recipe</a>
+            <a href="{% url 'uploadvideo' %}" class="btn btn-dark btn-lg ms-3">Upload Videos</a>
+        </div>
+    
+        <!-- Featured Recipes -->
+        <div class="container">
+            <h2 class="text-center mb-4">Featured Recipes</h2>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/arcade/64/tapas.png" alt="tapas"/>
+                                Appetizers</h3>
+                            <a href="{% url 'recipelist' 'Appetizers' %}" class="stretched-link"></a>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/office/40/pie.png" alt="pie"/>
+                                Desserts</h3>
+                            <a href="{% url 'recipelist' 'Desserts' %}" class="stretched-link"></a>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/external-smashingstocks-flat-smashing-stocks/66/external-Snacks-japan-smashingstocks-flat-smashing-stocks.png" alt="external-Snacks-japan-smashingstocks-flat-smashing-stocks"/>
+                                Snacks</h3>
+                            <a href="{% url 'recipelist' 'Snacks' %}" class="stretched-link"></a>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/external-icongeek26-flat-icongeek26/64/external-juice-healthy-lifestyle-icongeek26-flat-icongeek26.png" alt="external-juice-healthy-lifestyle-icongeek26-flat-icongeek26"/>
+                                Juice</h3> 
+                            <a href="{% url 'recipelist' 'Juice' %}" class="stretched-link"></a>                                             
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/emoji/48/green-salad-emoji.png" alt="green-salad-emoji"/>
+                                Salads</h3>
+                            <a href="{% url 'recipelist' 'Salad' %}" class="stretched-link"></a>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/fluency/48/cookies.png" alt="cookies"/>                                
+                                Bakes</h3>
+                            <a href="{% url 'recipelist' 'Bakes' %}" class="stretched-link"></a>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/external-wanicon-flat-wanicon/64/external-breakfast-hotel-wanicon-flat-wanicon.png" alt="external-breakfast-hotel-wanicon-flat-wanicon"/>
+                                Breakfast</h3>
+                            <a href="{% url 'recipelist' 'Breakfast' %}" class="stretched-link"></a>                                              
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/arcade/64/street-food.png" alt="street-food"/>
+                                Veggie</h3> 
+                            <a href="{% url 'recipelist' 'Veg' %}" class="stretched-link"></a>                                             
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/fluency/48/fried-chicken.png" alt="fried-chicken"/>
+                                Non-Veg</h3> 
+                            <a href="{% url 'recipelist' 'Non-veg' %}" class="stretched-link"></a>                                             
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/external-photo3ideastudio-flat-photo3ideastudio/64/external-salmon-cholesterol-photo3ideastudio-flat-photo3ideastudio.png" alt="external-salmon-cholesterol-photo3ideastudio-flat-photo3ideastudio"/>
+                                Seafood</h3>  
+                            <a href="{% url 'recipelist' 'Seafood' %}" class="stretched-link"></a>                                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 p-4">
+                    <div class="card border border-dark bg-light align-items-center">
+                        <div class="card-body text-center">
+                            <h3>
+                                <img width="40" height="40" src="https://img.icons8.com/color/48/banana-split.png" alt="banana-split"/>
+                                Other</h3>  
+                            <a href="{% url 'recipelist' 'Other' %}" class="stretched-link"></a>                                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
+{% endblock nav %}

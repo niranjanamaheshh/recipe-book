@@ -1,0 +1,37 @@
+from django.urls import path
+from .views import *
+from django.contrib.auth import views as auth_views
+
+urlpatterns=[
+    path('explorerecipe',ExploreRecipe.as_view(),name='explorerecipe'),
+    path('signup',SignupView.as_view(),name='signup'),
+    path('login',LoginView.as_view(),name='login'),
+    path('home',HomeView.as_view(),name='home'),
+    path('recipelist/<str:cat>',RecipeListView.as_view(),name='recipelist'),
+    path('addrecipe',add_recipe,name='addrecipe'),
+    path('mypost',PostView.as_view(),name='mypost'),
+    path('viewpost',AllPostView.as_view(),name='viewpost'),
+    path('recipedetail/<int:id>',RecipeDetailView.as_view(),name='recipedetail'),
+    path('uploadvideo',upload_video,name='uploadvideo'),
+    # path('viewvideo',view_all_videos,name='viewvideo'),
+    path('viewvideo',VideoView.as_view(),name='viewvideo'),
+    path('editrecipe/<int:id>',EditRecipeView.as_view(),name='edit'),
+    path('deleterecipe/<int:id>',DeleteRecipeView.as_view(),name='delete'),
+    path('likerecipe/<int:recipe_id>/',like_recipe, name='likerecipe'),
+    path('feedback/',submit_feedback, name='feedback'),
+    path('lgout',LogoutView.as_view(),name='logout'),
+    path('recipe/<int:recipe_id>/comments/',add_comment, name='manage_comments'),
+    path('comment/<int:comment_id>/delete/',delete_comment, name='delete_comment'),
+    path('comment/<int:comment_id>/like/',like_comment, name='like_comment'),
+    path('favorite',favorites_view,name='favorite'),
+    path('addtofavorite/<int:id>',addToFavorite,name='addtofavorite'),
+    path('removefav/<int:id>',RemoveFavorite,name='removefav'),
+    path('contact',ContactView.as_view(),name='contact'),
+    path('search',searchproduct,name='search'),
+    path('change-password/', change_password, name='changepass'),
+    # path('forgot-password/', forgot_password_view, name='forgot_password'),
+    # path('password-reset/', auth_views.PasswordResetView.as_view(template_name='forgotpass.html'), name='password_reset'),
+    # path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='passreset.html'), name='password_reset_done'),
+    # path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='passresetconfirm.html'), name='password_reset_confirm'),
+    # path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='passresetcomplete.html'), name='password_reset_complete'),
+]

@@ -1,0 +1,33 @@
+{% extends 'navbar.html' %}
+{% block nav %}
+{% load static %}
+        <div class="container mt-5 text-center">
+            <h1 class="display-4 fw-bold text-uppercase text-white py-3 px-4 rounded shadow" style="background-color: rgb(0, 0, 0)">
+              Discover New Recipes
+            </h1>
+          </div>
+        <div class="container my-5">
+            <div class="row">
+                {% for i in data %}
+                <div class="col-md-3 my-4">
+                    <div class="card border border-0" style="background-color:rgb(246, 255, 246);" >
+                        {% if i.image %}
+                            <img src="{{i.image.url}}" class="card-img-top" style="height: 300px;" alt="Recipe Image">
+                        {% endif %}
+                        <div class="card-body text-center">
+                            <h5 class="card-title" style="color:black;">{{i.name}}</h5>
+                            <a class="stretched-link" href="{% url 'recipedetail' i.id %}"></a>
+                        </div>
+                        <div class="row ms-3">
+                            <div class="col">
+                                <p class="ms-2">@{{i.user}}</p>
+                                <p class="justify-content-end ms-2">{{i.created_at}}</p>
+                                <p class="text-muted ms-2">{{ i.count_likes }} Likes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>   <br><br>    
+    {% endblock nav %}

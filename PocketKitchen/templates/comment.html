@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+
+    <body>
+        <body class="bg-light">
+            <div class="container mt-5">
+                <h1>Comments- <p style="font-size:medium;">{{ recipe.name }}</p></h1>
+        
+                <!-- Add New Comment Form -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <textarea name="content" rows="3" class="form-control" placeholder="Write your comment..."></textarea>
+                            <input type="hidden" name="parent_id" value=""> <!-- Blank for top-level comments -->
+                            <button type="submit" class="btn btn-success mt-2">Add Comment</button>
+                        </form>
+                    </div>
+                </div>
+        
+                <!-- Display Comments -->
+                <h2>Comments</h2>
+                <ul class="list-unstyled">
+                    {% for comment in comments %}
+                        <li class="card mb-3 p-3">
+                            <p><strong>{{ comment.user.username }}</strong>: {{ comment.content }}</p>
+                            <p class="text-muted small">Posted on: {{ comment.date }}</p>
+        
+                            <!-- Like/Unlike Button -->
+                            <form method="POST" action="{% url 'like_comment' comment.id %}" class="d-inline">
+                                {% csrf_token %}
+                                {% if request.user in comment.likes.all %}
+                                    <button type="submit" class="btn btn-warning btn-sm">Unlike</button>
+                                {% else %}
+                                    <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                                {% endif %}
+                            </form>
+                            <p class="small">Likes: {{ comment.like_count }}</p>
+        
+                            <!-- Delete Comment (if user is the comment owner) -->
+                            {% if request.user == comment.user %}
+                            <form method="POST" action="{% url 'delete_comment' comment.id %}" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                            {% endif %}
+        
+                            <!-- Reply Form (Only for top-level comments) -->
+                            {% if not comment.parent %}
+                            <form method="POST" action="{% url 'manage_comments' recipe.id %}" class="mt-2">
+                                {% csrf_token %}
+                                <textarea name="content" rows="2" class="form-control" placeholder="Reply to this comment..."></textarea>
+                                <input type="hidden" name="parent_id" value="{{ comment.id }}">  <!-- Set parent_id -->
+                                <button type="submit" class="btn btn-info btn-sm mt-2">Reply</button>
+                            </form>
+                            {% endif %}
+        
+                            <!-- Display Replies (Only show replies under the comment they belong to) -->
+                            {% if comment.replies.exists %}
+                            <ul class="ms-4">
+                                {% for reply in comment.replies.all %}
+                                <li class="card mb-2 p-3">
+                                    <p><strong>{{ reply.user.username }}</strong>: {{ reply.content }}</p>
+                                    <p class="text-muted small">Posted on: {{ reply.date }}</p>
+                                    
+                                    <!-- Like/Unlike Button for Reply -->
+                                    <form method="POST" action="{% url 'like_comment' reply.id %}" class="d-inline">
+                                        {% csrf_token %}
+                                        {% if request.user in reply.likes.all %}
+                                            <button type="submit" class="btn btn-warning btn-sm">Unlike</button>
+                                        {% else %}
+                                            <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                                        {% endif %}
+                                    </form>
+                                    <p class="small">Likes: {{ reply.like_count }}</p>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+        
+                <a href="{% url 'recipedetail' recipe.id %}" class="btn btn-secondary">Back to Recipe</a>
+            </div>
+        
+            
+        
+    </body>
+</html>

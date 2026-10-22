@@ -1,0 +1,16 @@
+{% extends 'navbar.html' %}
+{% block nav %}
+{% load static %}
+        <div class="d-flex justify-content-center align-items-center mt-5" >
+            <div class="w-75 border shadow bg-light p-3">
+                <h3 class="d-flex justify-content-center align-items-center text-primary">Post Your Recipe</h3>
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table class="table">
+                        {{form.as_table}}
+                    </table>
+                    <button class="btn btn-primary">Post</button>
+                </form>
+            </div>
+        </div>   
+{% endblock nav %}
